@@ -15,14 +15,12 @@ public class WebSocketServiceImpl implements WebSocketService {
     private final SimpMessagingTemplate messagingTemplate;
 
     @Override
-    public void sendNotification(TestWSRequest testWSRequest) {
-        System.out.println("WebSocketServiceImpl.sendNotification");
-        if (Objects.isNull(testWSRequest)) {
+    public void sendNotification(TestWSRequest message) {
+        if (Objects.isNull(message)) {
             log.error("empty object");
         } else {
-            System.out.println("sending a message");
-            System.out.println("testWSRequest: " + testWSRequest);
-            messagingTemplate.convertAndSend("/topic/events", testWSRequest);
+            System.out.println("Send message: " + message);
+            messagingTemplate.convertAndSend("/topic/messageFromBack", message);
         }
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
+    //Creates the in-memory message broker with one(topic) or more destinations for sending and receiving messages.
+    //Defines the prefix app that is used to filter destinations handled by methods annotated with @MessageMapping which you will implement in a controller.
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/topic");
@@ -18,7 +20,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/events");
+        registry.addEndpoint("/events")
+                .setAllowedOrigins("http://localhost:5173");
     }
 
 }
